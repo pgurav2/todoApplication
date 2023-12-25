@@ -5,6 +5,8 @@ import { auth, db } from "./firebase";
 import { uid } from "uid";
 import { set, ref, onValue, remove, update } from "firebase/database";
 import { useNavigate } from "react-router-dom";
+import Button from "./components/button";
+import "./css/todo.css";
 
 export default function Todo() {
   const [todo, settodo] = useState("");
@@ -85,40 +87,49 @@ export default function Todo() {
   };
 
   return (
-    <div>
+    <div className="main_container">
       <p>TODO</p>
-      <input
-        type="text"
-        value={todo}
-        onChange={(e) => {
-          settodo(e.target.value);
-        }}
-      />
-
-      {console.log(list)}
-      <div>
+      <div className="todo_wrapper">
+        <input
+          className="input_field"
+          placeholder="Enter your task here"
+          type="text"
+          value={todo}
+          onChange={(e) => {
+            settodo(e.target.value);
+          }}
+        />
+        {isedit ? (
+          <div>
+            <Button
+              name={"CONFIRM"}
+              className={"add_confirm_btn"}
+              onClick={() => todo !== "" && handleConfirm()}
+            />
+          </div>
+        ) : (
+          <div>
+            <Button
+              name={"ADD"}
+              className={"add_confirm_btn"}
+              onClick={() => todo !== "" && writetolist()}
+            />
+          </div>
+        )}
+      </div>
+      {/*       
+      {console.log(list)} */}
+      <div className={list.length > 0 ? "todolist_wrapper" : null}>
         {list?.reverse()?.map((item, index) => (
-          <div key={"list" + index}>
-            <p>{index + 1 + ". " + item.todo}</p>
-            <button onClick={() => handleDelete(item.uid)}>delete</button>
-            <button onClick={() => handleUpdate(item)}>update</button>
+          <div key={"list" + index} className="todo_list">
+            <p className="task">{index + 1 + ". " + item.todo}</p>
+            <Button name={"DELETE"} onClick={() => handleDelete(item.uid)} />
+            <Button name={"UPDATE"} onClick={() => handleUpdate(item)} />
           </div>
         ))}
       </div>
-      {isedit ? (
-        <div>
-          <button onClick={() => todo !== "" && handleConfirm()}>
-            Confirm
-          </button>
-        </div>
-      ) : (
-        <div>
-          <button onClick={() => todo !== "" && writetolist()}>Add</button>
-        </div>
-      )}
 
-      {/* <button onClick={writetolist}>ADD</button> */}
-      <button onClick={signout}>Sign Out</button>
+      <Button name={"SIGN OUT"} onClick={signout} className={"sign_out"} />
     </div>
   );
 }

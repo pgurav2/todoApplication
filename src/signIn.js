@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
-import "./App.css";
-import { useNavigate } from "react-router-dom";
+import "./css/signin.css";
 
-export default function Regiser() {
+import { useNavigate } from "react-router-dom";
+import Button from "./components/button";
+
+export default function SignIn() {
   const [email, setinput] = useState("");
   const [password, setpassword] = useState("");
   const [ispassword, setispassword] = useState(false);
   const navigate = useNavigate();
 
   const signIn = (e) => {
-   
-    console.log(email,password)
+    console.log(email, password);
     signInWithEmailAndPassword(auth, email, password)
-    
-    
       .then((userCredential) => {
         console.log("userCredential", userCredential);
         alert("Login Successfull");
@@ -34,11 +33,11 @@ export default function Regiser() {
   return (
     <div className="App">
       <h1>SIGN IN</h1>
-    
-        <label>Enter your Email</label>
+      <div>
+        <p className="text_name">Email</p>
         <input
           type="email"
-          className="input_name"
+          className="input_field"
           placeholder="Enter Your Name"
           value={email}
           onChange={(e) => {
@@ -46,11 +45,14 @@ export default function Regiser() {
             setinput(e.target.value);
           }}
         />
-        <div>
-          <label>Enter your password</label>
+      </div>
+
+      <div>
+        <p>Password</p>
+        <div className="password_wrapper">
           <input
             type={ispassword ? "text" : "password"}
-            className="input_password"
+            className="input_field"
             placeholder="Enter Your Password"
             value={password}
             onChange={(e) => {
@@ -58,20 +60,15 @@ export default function Regiser() {
               setpassword(e.target.value);
             }}
           />
-          <button type="submit" onClick={signIn}>
-            LOG IN
-          </button>
-         
           
-          <button onClick={(e)=>{
-            
-            passwordHide()
-          }}>{ispassword ? "hide" : "show"}</button>
-          <p onClick={() => navigate("/signup")}>Create an account</p>
+          <Button name={ispassword ? "hide" : "show"} onClick={passwordHide} className={"pass_btn"} />
         </div>
-  
-     
+      </div>
+      <Button name={"LOG IN"} onClick={signIn} className={"log_in"} />
 
+      <p className="create_lable" onClick={() => navigate("/signup")}>
+        Create an account
+      </p>
     </div>
   );
 }
