@@ -1,0 +1,45 @@
+.text_name{
+    text-align: justify;
+}
+.App{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.container{
+    display: flex;
+    justify-content: center;
+
+}
+
+.input_field{
+    width: 600px;
+    padding: 20px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.create_lable{
+    cursor: pointer;
+    color: cornflowerblue;
+    font-size: 18px;
+}
+
+.password_wrapper{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.log_in{
+    width: 640px;
+    background-color: rgb(81, 96, 123);
+    margin-top: 60px
+}
+.pass_btn{
+    position: absolute;
+    right: 1%;
+    top: 50%;
+    transform: translateY(-50%);
+
+}

@@ -15,8 +15,9 @@ export default function Todo() {
   const [tempid, settempid] = useState("");
 
   const navigate = useNavigate();
+  
   const signout = () => {
-    // e.preventDefault();
+ 
     signOut(auth)
       .then((data) => {
         console.log("pratiksha", data);
@@ -87,49 +88,51 @@ export default function Todo() {
   };
 
   return (
-    <div className="main_container">
-      <p>TODO</p>
-      <div className="todo_wrapper">
-        <input
-          className="input_field"
-          placeholder="Enter your task here"
-          type="text"
-          value={todo}
-          onChange={(e) => {
-            settodo(e.target.value);
-          }}
-        />
-        {isedit ? (
-          <div>
-            <Button
-              name={"CONFIRM"}
-              className={"add_confirm_btn"}
-              onClick={() => todo !== "" && handleConfirm()}
-            />
-          </div>
-        ) : (
-          <div>
-            <Button
-              name={"ADD"}
-              className={"add_confirm_btn"}
-              onClick={() => todo !== "" && writetolist()}
-            />
-          </div>
-        )}
-      </div>
-      {/*       
-      {console.log(list)} */}
-      <div className={list.length > 0 ? "todolist_wrapper" : null}>
-        {list?.reverse()?.map((item, index) => (
-          <div key={"list" + index} className="todo_list">
-            <p className="task">{index + 1 + ". " + item.todo}</p>
-            <Button name={"DELETE"} onClick={() => handleDelete(item.uid)} />
-            <Button name={"UPDATE"} onClick={() => handleUpdate(item)} />
-          </div>
-        ))}
-      </div>
+    <div className="container">
+      <div className="main_container">
+        <p>TODO</p>
+        <div className="todo_wrapper">
+          <input
+            className="input_field"
+            placeholder="Enter your task here"
+            type="text"
+            value={todo}
+            onChange={(e) => {
+              settodo(e.target.value);
+            }}
+          />
+          {isedit ? (
+            <div>
+              <Button
+                name={"CONFIRM"}
+                className={"add_confirm_btn"}
+                onClick={() => todo !== "" && handleConfirm()}
+              />
+            </div>
+          ) : (
+            <div>
+              <Button
+                name={"ADD"}
+                className={"add_confirm_btn"}
+                onClick={() => todo !== "" && writetolist()}
+              />
+            </div>
+          )}
+        </div>
+        {/*       
+    {console.log(list)} */}
+        <div className={list.length > 0 ? "todolist_wrapper" : null}>
+          {list?.reverse()?.map((item, index) => (
+            <div key={"list" + index} className="todo_list">
+              <p className="task">{index + 1 + ". " + item.todo}</p>
+              <Button name={"DELETE"} onClick={() => handleDelete(item.uid)} />
+              <Button name={"UPDATE"} onClick={() => handleUpdate(item)} />
+            </div>
+          ))}
+        </div>
 
-      <Button name={"SIGN OUT"} onClick={signout} className={"sign_out"} />
+        <Button name={"SIGN OUT"} onClick={signout} className={"sign_out"} />
+      </div>
     </div>
   );
 }

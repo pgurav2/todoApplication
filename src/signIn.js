@@ -38,7 +38,7 @@ export default function SignIn() {
         <input
           type="email"
           className="input_field"
-          placeholder="Enter Your Name"
+          placeholder="Enter Your Email"
           value={email}
           onChange={(e) => {
             // console.log(e)
@@ -60,8 +60,12 @@ export default function SignIn() {
               setpassword(e.target.value);
             }}
           />
-          
-          <Button name={ispassword ? "hide" : "show"} onClick={passwordHide} className={"pass_btn"} />
+
+          <Button
+            name={ispassword ? "hide" : "show"}
+            onClick={passwordHide}
+            className={"pass_btn"}
+          />
         </div>
       </div>
       <Button name={"LOG IN"} onClick={signIn} className={"log_in"} />
