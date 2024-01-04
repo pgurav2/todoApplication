@@ -21,7 +21,7 @@ export default function Todo() {
     signOut(auth)
       .then((data) => {
         console.log("pratiksha", data);
-        alert("SignOut successfully");
+        // alert("SignOut successfully");
         navigate("/");
       })
       .catch((error) => {

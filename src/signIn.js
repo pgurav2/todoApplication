@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
-import "./css/signin.css";
+import "./css/common.css";
+import eye from "./assets/visible.png";
+import hide from "./assets/hide.png";
 
 import { useNavigate } from "react-router-dom";
 import Button from "./components/button";
+import Popup from "./components/popup";
 
 export default function SignIn() {
   const [email, setinput] = useState("");
   const [password, setpassword] = useState("");
-  const [ispassword, setispassword] = useState(false);
+  const [ispassword, setispassword] = useState(true);
+  const [popup, setpopup] = useState(false);
+  const [usererror, setusererror] = useState(false);
   const navigate = useNavigate();
 
   const signIn = (e) => {
@@ -17,18 +22,25 @@ export default function SignIn() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("userCredential", userCredential);
-        alert("Login Successfull");
-        navigate("/todo");
+        // alert("Login Successfull");
+        setpopup(true);
+        // navigate("/todo");
       })
       .catch((error) => {
-        alert("Invalid Credentials");
+        setusererror(true);
+        myStopFunction();
+
         console.log("error", error);
       });
   };
 
-  function passwordHide() {
-    setispassword(!ispassword);
+  function myStopFunction() {
+    setTimeout(() => setusererror(false), 5000);
   }
+
+  // function passwordHide() {
+  //   setispassword(!ispassword);
+  // }
 
   return (
     <div className="App">
@@ -51,7 +63,7 @@ export default function SignIn() {
         <p>Password</p>
         <div className="password_wrapper">
           <input
-            type={ispassword ? "text" : "password"}
+            type={ispassword ? "password" : "text"}
             className="input_field"
             placeholder="Enter Your Password"
             value={password}
@@ -61,18 +73,36 @@ export default function SignIn() {
             }}
           />
 
-          <Button
+          {/* <Button
             name={ispassword ? "hide" : "show"}
             onClick={passwordHide}
             className={"pass_btn"}
-          />
+          /> */}
+          {ispassword ? (
+            <img
+              src={hide}
+              className="pass_btn"
+              onClick={() => setispassword(false)}
+            />
+          ) : (
+            <img
+              src={eye}
+              className="pass_btn"
+              onClick={() => setispassword(true)}
+            />
+          )}
         </div>
       </div>
+      {usererror && <p className="user_error">Invalid Credentials</p>}
       <Button name={"LOG IN"} onClick={signIn} className={"log_in"} />
 
       <p className="create_lable" onClick={() => navigate("/signup")}>
         Create an account
       </p>
+
+      {popup && (
+        <Popup title={"Sign In Complete!"} okclick={() => navigate("/todo")} />
+      )}
     </div>
   );
 }

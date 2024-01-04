@@ -1,24 +1,20 @@
-/* .text_name{
+.text_name {
     text-align: justify;
 }
-.App{
+
+.App {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100%;
     height: 100vh;
-    background-image: url("./desktopimg.png");
+    background-image: url("../assets/desktopimg.png");
     background-position: center;
     background-size: cover;
 }
-.container{
-    display: flex;
-    justify-content: center;
 
-}
-
-.input_field_signup{
+.input_field {
     background-color: #224957;
     border: none;
     width: 600px;
@@ -28,30 +24,40 @@
     color: #fff;
 }
 
-.create_lable{
+.create_lable {
     cursor: pointer;
     color: cornflowerblue;
     font-size: 18px;
 }
 
-.password_wrapper{
+.password_wrapper {
     display: flex;
     align-items: center;
     position: relative;
 }
-.log_in{
+
+.log_in {
     width: 640px;
-    background-color: rgb(81, 96, 123);
+    background-color: #20DF7F;
     margin-top: 60px
 }
-.pass_btn{
+
+.pass_btn {
     position: absolute;
-    right: 1%;
+    right: 2%;
     top: 50%;
     transform: translateY(-50%);
 
 }
+
 ::placeholder {
     color: #d2cccc;
-    
-  } */
+
+}
+
+.user_error {
+    color: red;
+    text-align: left;
+    margin-bottom: 0px;
+
+}
