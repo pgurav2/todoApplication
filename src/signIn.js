@@ -17,7 +17,7 @@ export default function SignIn() {
   const [usererror, setusererror] = useState(false);
   const navigate = useNavigate();
 
-  const signIn = (e) => {
+  const signIn = () => {
     console.log(email, password);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -93,7 +93,9 @@ export default function SignIn() {
           )}
         </div>
       </div>
+
       {usererror && <p className="user_error">Invalid Credentials</p>}
+      
       <Button name={"LOG IN"} onClick={signIn} className={"log_in"} />
 
       <p className="create_lable" onClick={() => navigate("/signup")}>

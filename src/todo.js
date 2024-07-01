@@ -15,13 +15,12 @@ export default function Todo() {
   const [tempid, settempid] = useState("");
 
   const navigate = useNavigate();
-  
+
   const signout = () => {
- 
     signOut(auth)
       .then((data) => {
         console.log("pratiksha", data);
-        // alert("SignOut successfully");
+        //  alert("SignOut successfully");
         navigate("/");
       })
       .catch((error) => {
@@ -37,10 +36,10 @@ export default function Todo() {
           console.log("useeffecttttttttttttttttttttttt");
 
           setlist([]);
-          // console.log(dbData)
-          // console.log("dddddddddd",dbData.val());
+          console.log(dbData)
+          console.log("dddddddddd",dbData.val());
           const data = dbData?.val();
-          //   console.log(Object.values(data));
+            console.log(Object.values(data));
           if (data !== null) {
             console.log("ddddd", Object.values(data));
             let _list = [];
@@ -63,10 +62,12 @@ export default function Todo() {
     set(ref(db, `/${auth.currentUser.uid}/${uidd}`), {
       todo: todo,
       uid: uidd,
+      
     });
 
     settodo("");
   };
+  
   const handleDelete = (id) => {
     remove(ref(db, `/${auth.currentUser.uid}/${id}`), {});
   };
@@ -77,6 +78,7 @@ export default function Todo() {
     settempid(value.uid);
     setisedit(true);
   };
+
   const handleConfirm = () => {
     update(ref(db, `/${auth.currentUser.uid}/${tempid}`), {
       todo: todo,
@@ -122,6 +124,7 @@ export default function Todo() {
         {/*       
     {console.log(list)} */}
         <div className={list.length > 0 ? "todolist_wrapper" : null}>
+
           {list?.reverse()?.map((item, index) => (
             <div key={"list" + index} className="todo_list">
               <p className="task">{index + 1 + ". " + item.todo}</p>
